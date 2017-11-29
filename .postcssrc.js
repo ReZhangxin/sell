@@ -3,6 +3,7 @@
 module.exports = {
   "plugins": {
     // to edit target browsers: use "browserslist" field in package.json
+    // 就这样就可以~
     "postcss-import": {},
     "autoprefixer": {}
   }
