@@ -32,7 +32,7 @@ export default {
   created: function () {
     axios.get('/api/seller')
     .then(res => {
-      if (res.data.errno == ERR_OK) {
+      if (res.data.errno === ERR_OK) {
         this.seller = res.data.data
       }
       console.log(res.data)
@@ -47,12 +47,6 @@ export default {
   }
 }
 </script>
-
-<style>
-.tab{
-  background: #008080;
-}
-</style>
 
 <style lang="stylus">
   @import './common/stylus/mixin.styl'

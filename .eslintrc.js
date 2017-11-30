@@ -29,7 +29,7 @@ module.exports = {
     'curly': [2, 'multi-line'],
     'dot-location': [2, 'property'],
     'eol-last': 2,
-    'eqeqeq': [0, 'allow-null'],
+    'eqeqeq': [2, 'allow-null'],
     'generator-star-spacing': [2, { 'before': true, 'after': true }],
     'handle-callback-err': [2, '^(err|error)$' ],
     'indent': [2, 2, { 'SwitchCase': 1 }],
