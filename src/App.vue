@@ -35,8 +35,8 @@ export default {
       if (res.data.errno === ERR_OK) {
         this.seller = res.data.data
       }
-      console.log(res.data)
-      console.log(this.seller)
+      // console.log(res.data)
+      // console.log(this.seller)
     })
     .catch(err => {
       console.log(err)
