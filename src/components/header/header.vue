@@ -21,15 +21,17 @@
       </div>
       <div v-if="seller.supports" class="support-content">
         <span class="count">{{seller.supports.length}}个</span>
-        <i></i>
+        <i class="icon-keyboard_arrow_right"></i>
       </div>
-    </div>
-    <div class="background">
-        <img :src="seller.avatar" width="100%" height="100%" >
     </div>
     <!-- 商家公告 -->
     <div class="bulletin-wrapper">
-      {{seller.bulletin}}
+      <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
+      <i class="icon-keyboard_arrow_right"></i>
+    </div>
+    <!-- 背景图 -->
+    <div class="background">
+        <img :src="seller.avatar" width="100%" height="100%" >
     </div>
   </div>
 </template>
@@ -52,10 +54,12 @@ export default {
 .header
   position relative
   blur: 10px
+  // 为了让底部图片显示设置半透明背景
   background: rgba(7,17,27,.5)
   color rgb(255,255,255)
   overflow hidden
   .content-wrapper
+    position relative
     padding 24px 12px 18px 24px
     // 消除图片与文字之间的缝隙
     font-size 0
@@ -109,31 +113,59 @@ export default {
         .text
           line-height 12px
           font-size 10px
-.background
-  position absolute
-  z-index -1
-  top 0
-  left 0
-  width 100%
-  height 100%
-  filter blur(10px)
-.bulletin-wrapper
-  padding 0 16px 0 12px
-  height 28px
-  line-height 28px
-  font-size 10px
-  font-weight 200
-  background-color rgba(7,17,27,.2)
-  overflow hidden
-  text-overflow ellipsis
-  white-space nowrap
-  position relative
-  cursor pointer
-  &:after
-    content '>'
+    .support-content
+      position absolute
+      right 12px
+      bottom 14px
+      padding 0 8px
+      height 24px
+      line-height 24px
+      border-radius 14px
+      background rgba(0,0,0,.2)
+      text-align center
+      .count
+        font-size 10px
+        // 为了让图标字体和文字居中就要top
+        vertical-align top
+      .icon-keyboard_arrow_right
+        margin-left 2px
+        // 全局默认line-height 1所以要设置相同行高
+        line-height 24px
+        font-size 10px
+  .bulletin-wrapper
+    position relative
+    height 28px
+    padding 0 22px 0 12px
+    line-height 28px
+    background-color rgba(7,17,27,.2)
+    overflow hidden
+    text-overflow ellipsis
+    white-space nowrap
+    cursor pointer
+    .bulletin-title
+      display inline-block
+      width 22px
+      height 12px
+      margin-top 8px
+      vertical-align top
+      bg-image('bulletin')
+      background-size 22px 12px
+      background-repeat no-repeat
+    .bulletin-text
+      margin 0 4px
+      font-size 10px
+      vertical-align top
+    .icon-keyboard_arrow_right
+      position absolute
+      font-size 10px
+      right 12px
+      top 9px
+  .background
     position absolute
-    right 12px
+    z-index -1
     top 0
-    padding-left 4px
-
+    left 0
+    width 100%
+    height 100%
+    filter blur(10px)
 </style>
