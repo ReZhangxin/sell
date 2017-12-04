@@ -35,16 +35,18 @@
         <img :src="seller.avatar" width="100%" height="100%" >
     </div>
     <!-- 弹出层 -->
-    <div v-show="detailShow" class="detail">
-      <div class="detail-wrapper clearfix">
-        <div class="detail-main">
-          <h1 class="name">{{seller.name}}</h1>
+    <transition name="slide-fade">
+      <div v-show="detailShow" class="detail">
+        <div class="detail-wrapper clearfix">
+          <div class="detail-main">
+            <h1 class="name">{{seller.name}}</h1>
+          </div>
+        </div>
+        <div class="detail-close"@click="detailShow = !detailShow">
+          <i class="icon-close"></i>
         </div>
       </div>
-      <div class="detail-close"@click="hideDetail">
-        <i class="icon-close"></i>
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -63,9 +65,6 @@ export default {
   methods: {
     showDetail: function () {
       this.detailShow = true
-    },
-    hideDetail: function () {
-      this.detailShow = false
     }
   },
   created () {
@@ -222,4 +221,13 @@ export default {
       margin -64px auto 0 auto
       clear both
       font-size 32px
+
+.slide-fade-enter-active 
+  transition: all .5s ease
+.slide-fade-leave-active 
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0)
+.slide-fade-enter, .slide-fade-leave-to
+  transform: translateX(100%)
+  opacity: 0
+
 </style>
