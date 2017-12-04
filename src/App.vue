@@ -57,7 +57,6 @@ export default {
     line-height: 40px
     /* border-bottom: 1px solid */
     border-1px(#ddd)
-    dddddd
     .tab-item
       flex: 1
       text-align: center

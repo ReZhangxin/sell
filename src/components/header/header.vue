@@ -14,9 +14,9 @@
         <div class="description">
           {{seller.description}}/{{seller.deliveryTime}}分钟送达
         </div>
-        <div v-if="seller.supports" class="supports">
-          <span class="icon"></span> 
-          <span>{{seller.supports[0].description}}</span>
+        <div v-if="seller.supports" class="support">
+          <span class="icon" :class="classMap[seller.supports[0].type]"></span> 
+          <span class="text">{{seller.supports[0].description}}</span>
         </div>
       </div>
     </div>
@@ -36,6 +36,9 @@ export default {
     seller: {
       type: Object
     }
+  },
+  created () {
+    this.classMap = ['decress', 'discount', 'guarantee', 'invoice', 'special']
   }
 }
 </script>
@@ -50,6 +53,7 @@ export default {
   overflow hidden
   .content-wrapper
     padding 24px 12px 18px 24px
+    // 消除图片与文字之间的缝隙
     font-size 0
     .avatar
       border-radius 2px
@@ -65,6 +69,7 @@ export default {
           width 30px
           height 18px
           display inline-block
+          // inline-block 顶部对齐
           vertical-align top
           bg-image('brand')
           background-size 30px 18px
@@ -74,14 +79,32 @@ export default {
           font-size 16px
           font-weight bold
           line-height 18px
-      .supports
-          line-height 12px
-          font-size 10px
       .description
         font-size 12px
         line-height 12px
         margin 8px 0 10px
-
+      .support
+        .icon
+          display inline-block
+          vertical-align top
+          width 12px
+          height 12px
+          margin-right 4px
+          background-size 12px 12px
+          background-repeat no-repeat
+          &.decress
+            bg-image('decrease_1')
+          &.discount
+            bg-image('discount_1')
+          &.guarantee
+            bg-image('guarantee_1')
+          &.invoice
+            bg-image('invoice_1')
+          &.special
+            bg-image('special_1')
+        .text
+          line-height 12px
+          font-size 12px
 .background
   position absolute
   z-index -1
