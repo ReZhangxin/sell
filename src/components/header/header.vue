@@ -16,8 +16,12 @@
         </div>
         <div v-if="seller.supports" class="support">
           <span class="icon" :class="classMap[seller.supports[0].type]"></span> 
-          <span class="text">{{seller.supports[0].description}}</span>
+          <span class="text">{{seller.supports[1].description}}</span>
         </div>
+      </div>
+      <div v-if="seller.supports" class="support-content">
+        <span class="count">{{seller.supports.length}}个</span>
+        <i></i>
       </div>
     </div>
     <div class="background">
@@ -104,7 +108,7 @@ export default {
             bg-image('special_1')
         .text
           line-height 12px
-          font-size 12px
+          font-size 10px
 .background
   position absolute
   z-index -1
