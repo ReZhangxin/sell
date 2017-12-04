@@ -19,19 +19,31 @@
           <span class="text">{{seller.supports[1].description}}</span>
         </div>
       </div>
-      <div v-if="seller.supports" class="support-content">
+      <!-- 多少优惠券 -->
+      <div v-if="seller.supports" class="support-content" @click="showDetail">
         <span class="count">{{seller.supports.length}}个</span>
         <i class="icon-keyboard_arrow_right"></i>
       </div>
     </div>
     <!-- 商家公告 -->
-    <div class="bulletin-wrapper">
+    <div class="bulletin-wrapper" @click="showDetail">
       <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
     </div>
     <!-- 背景图 -->
     <div class="background">
         <img :src="seller.avatar" width="100%" height="100%" >
+    </div>
+    <!-- 弹出层 -->
+    <div v-show="detailShow" class="detail">
+      <div class="detail-wrapper clearfix">
+        <div class="detail-main">
+          <h1 class="name">{{seller.name}}</h1>
+        </div>
+      </div>
+      <div class="detail-close"@click="hideDetail">
+        <i class="icon-close"></i>
+      </div>
     </div>
   </div>
 </template>
@@ -41,6 +53,19 @@ export default {
   props: {
     seller: {
       type: Object
+    }
+  },
+  data () {
+    return {
+      detailShow: false
+    }
+  },
+  methods: {
+    showDetail: function () {
+      this.detailShow = true
+    },
+    hideDetail: function () {
+      this.detailShow = false
     }
   },
   created () {
@@ -168,4 +193,33 @@ export default {
     width 100%
     height 100%
     filter blur(10px)
+  .detail
+    position fixed
+    z-index 100
+    top 0
+    left 0
+    width 100%
+    height 100%
+    // 内容超出，出现滚动条
+    overflow auto
+    background rgba(7,17,27,.8)
+    .detail-wrapper
+      width 100%
+      min-height 100%
+      .detail-main
+        margin-top 64px
+        padding-bottom 64px
+        .name
+          line-height 16px
+          text-align center
+          font-size 16px
+          font-weight 700
+
+    .detail-close
+      position relative
+      width 32px
+      height 32px
+      margin -64px auto 0 auto
+      clear both
+      font-size 32px
 </style>
