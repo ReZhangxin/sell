@@ -1,6 +1,6 @@
 <template>
    <div>
-     <div class="discounts-1"  v-for="(item,index) in data" :key="index" :class="disType">
+     <div v-for="(item,index) in data" :key="index" :class="disType">
       <span class="icon" :class="classMap[data[index].type]" ></span> 
       <span class="text">{{data[index].description}}</span>
      </div>
@@ -30,52 +30,15 @@ export default {
 
 <style lang="stylus">
 @import '../../common/stylus/mixin'
+
 .discounts-1
-  vertical-align top
-  padding 0 0 12px 0
-  &:last-child
-    padding-bottom 0
-  .icon
-    display inline-block
-    width 12px
-    height 12px
-    margin-right 4px
-    background-size 12px 12px
-    background-repeat no-repeat
-    vertical-align top
-    &.decress
-      bg-image('decrease_1')
-    &.discount
-      bg-image('discount_1')
-    &.guarantee
-      bg-image('guarantee_1')
-    &.invoice
-      bg-image('invoice_1')
-    &.special
-      bg-image('special_1')
-.discounts-2
-  vertical-align top
-  padding 0 0 12px 0
-  &:last-child
-    padding-bottom 0
-  .icon
-    display inline-block
-    width 12px
-    height 12px
-    margin-right 4px
-    background-size 12px 12px
-    background-repeat no-repeat
-    vertical-align top
-    &.decress
-      bg-image('decrease_2')
-    &.discount
-      bg-image('discount_2')
-    &.guarantee
-      bg-image('guarantee_2')
-    &.invoice
-      bg-image('invoice_2')
-    &.special
-      bg-image('special_2')
+  discounts(12px)
   .text
+    font-size 10px
     line-height 12px
+.discounts-2
+  discounts(16px)
+  .text
+    font-size 12px
+    line-height 16px
 </style>

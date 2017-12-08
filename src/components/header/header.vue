@@ -49,9 +49,7 @@
               <div class="text">优惠信息</div>
               <div class="line"></div>
             </div>
-            <div class="supports">
-              <discount :data="seller.supports" :size='2'></discount>
-            </div>
+            <discount class="supports" :data="seller.supports" :size='2'></discount>
             <div class="title">
               <div class="line"></div>
               <div class="text">商家公告</div>
@@ -251,7 +249,6 @@ export default {
           margin 0 auto
           font-size 12px
           font-weight 200
-          line-height 12px
         .bulletin
           width 80%
           margin 0 auto
