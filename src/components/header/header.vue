@@ -14,10 +14,10 @@
         <div class="description">
           {{seller.description}}/{{seller.deliveryTime}}分钟送达
         </div>
-        <div v-if="seller.supports" class="support">
-          <span class="icon" :class="classMap[seller.supports[0].type]"></span> 
-          <span class="text">{{seller.supports[1].description}}</span>
+        <div class="h-discount"> 
+          <discount :data="seller.supports" :size="1"></discount>
         </div>
+        
       </div>
       <!-- 多少优惠券 -->
       <div v-if="seller.supports" class="support-content" @click="showDetail">
@@ -49,12 +49,9 @@
               <div class="text">优惠信息</div>
               <div class="line"></div>
             </div>
-            <ul v-if="seller.supports" class="supports">
-              <li v-for="(item,index) in seller.supports" :key="index" class="supports-item">
-                <span class="icon" :class="classMap[seller.supports[index].type]"></span>
-                <span class="text">{{seller.supports[index].description}}</span>
-              </li>
-            </ul>
+            <div class="supports">
+              <discount :data="seller.supports" :size='2'></discount>
+            </div>
             <div class="title">
               <div class="line"></div>
               <div class="text">商家公告</div>
@@ -75,6 +72,7 @@
 
 <script>
 import star from '@/components/star/star'
+import discount from '@/components/discount/discount'
 export default {
   props: {
     seller: {
@@ -95,7 +93,8 @@ export default {
     this.classMap = ['decress', 'discount', 'guarantee', 'invoice', 'special']
   },
   components: {
-    star
+    star,
+    discount
   }
 }
 </script>
@@ -142,28 +141,9 @@ export default {
         font-size 12px
         line-height 12px
         margin 8px 0 10px
-      .support
-        .icon
-          display inline-block
-          vertical-align top
-          width 12px
-          height 12px
-          margin-right 4px
-          background-size 12px 12px
-          background-repeat no-repeat
-          &.decress
-            bg-image('decrease_1')
-          &.discount
-            bg-image('discount_1')
-          &.guarantee
-            bg-image('guarantee_1')
-          &.invoice
-            bg-image('invoice_1')
-          &.special
-            bg-image('special_1')
-        .text
-          line-height 12px
-          font-size 10px
+      .h-discount
+        height 13px
+        overflow hidden
     .support-content
       position absolute
       right 12px
@@ -269,33 +249,9 @@ export default {
         .supports
           width 80%
           margin 0 auto
-          .supports-item
-            padding 0 12px
-            margin-bottom 12px
-            font-size 0
-            &:last-child
-              margin-bottom 0
-            .icon
-              display inline-block
-              width 16px
-              height 16px
-              vertical-align top
-              margin-right 6px
-              background-size 16px 16px
-              background-repeat no-repeat
-              &.decress
-                bg-image('decrease_2')
-              &.discount
-                bg-image('discount_2')
-              &.guarantee
-                bg-image('guarantee_2')
-              &.invoice
-                bg-image('invoice_2')
-              &.special
-                bg-image('special_2')
-            .text
-              line-height 12px
-              font-size 12px
+          font-size 12px
+          font-weight 200
+          line-height 12px
         .bulletin
           width 80%
           margin 0 auto
