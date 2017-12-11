@@ -1,9 +1,9 @@
 <template>
    <div>
-     <div v-for="(item,index) in data" :key="index" :class="disType">
+    <div v-for="(item,index) in data" :key="index" :class="disType">
       <span class="icon" :class="classMap[data[index].type]" ></span> 
       <span class="text">{{data[index].description}}</span>
-     </div>
+    </div>
   </div>
 </template>
 
