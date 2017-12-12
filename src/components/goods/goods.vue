@@ -95,6 +95,7 @@ export default {
   },
   methods: {
     selectMenu (index, event) {
+      //组织非vue事件
       if (!event._constructed) {
         return
       }
