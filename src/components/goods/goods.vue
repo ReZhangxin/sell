@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     selectMenu (index, event) {
-      //组织非vue事件
+      // 组织非vue事件
       if (!event._constructed) {
         return
       }
@@ -103,13 +103,13 @@ export default {
       const el = foodList[index]
       this.foodScroll.scrollToElement(el, 300)
     },
-    selectFood (food, event) {
-      if (!event._constructed) {
-        return
-      }
-      this.selectedFood = food
-      this.$refs.food.show()
-    },
+    // selectFood (food, event) {
+    //   if (!event._constructed) {
+    //     return
+    //   }
+    //   this.selectedFood = food
+    //   this.$refs.food.show()
+    // },
     _initScroll () {
       this.menuScroll = new BScroll(this.$refs.menuWrapper, {
         click: true
@@ -151,7 +151,7 @@ export default {
     _followScroll (index) {
       const menuList = this.$refs.menuList
       const el = menuList[index]
-      this.menuScroll.scrollToElement(el, 300, 0, -100)
+      this.menuScroll.scrollToElement(el, 100, 0, -100)
     }
   }
 }
