@@ -37,12 +37,14 @@
           </li>
         </ul>
       </div>
+      <shopcart></shopcart>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import BScroll from 'better-scroll'
+import shopcart from '@/components/shopcart/shopcart'
 const ERR_OK = 0
 export default {
   props: {
@@ -153,6 +155,9 @@ export default {
       const el = menuList[index]
       this.menuScroll.scrollToElement(el, 100, 0, -100)
     }
+  },
+  components: {
+    shopcart
   }
 }
 </script>
