@@ -1,4 +1,5 @@
-<template>
+<template
+>
   <div class="shopcart">
     <div class="content">
       <div class="content-left">
@@ -13,7 +14,7 @@
       </div>
       <div class="content-right">
         <div class="pay">
-          ￥{{minPrice}}元起送
+          {{payDesc}}
         </div>
       </div>
     </div>
@@ -29,7 +30,12 @@ export default {
     selectFoods: {
       type: Array,
       default () {
-        return []
+        return [
+          {
+            price: 12,
+            count: 1
+          }
+        ]
       }
     },
     deliveryPrice: {
@@ -55,6 +61,16 @@ export default {
         count += food.count
       })
       return count
+    },
+    payDesc () {
+      if (this.totalPrice === 0) {
+        return `￥${this.minPrice}元起送`
+      } else if (this.totalPrice < this.minPrice) {
+        const diff = this.minPrice - this.totalPrice
+        return `还差￥${diff}元起送`
+      } else {
+        return '去结算'
+      }
     }
   }
 }
