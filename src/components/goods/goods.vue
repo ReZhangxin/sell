@@ -31,13 +31,16 @@
                     <span class="now">￥{{food.price}}</span>
                     <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                   </div>
+                  <div class="cartcontrol-wrapper">
+                    <cartcontrol :food='food'></cartcontrol>
+                  </div>
                 </div>
               </li>
             </ul>
           </li>
         </ul>
       </div>
-      <shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
+      <shopcart :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
   </div>
 </template>
 
@@ -45,6 +48,7 @@
 import axios from 'axios'
 import BScroll from 'better-scroll'
 import shopcart from '@/components/shopcart/shopcart'
+import cartcontrol from '@/components/cartcontrol/cartcontrol'
 const ERR_OK = 0
 export default {
   props: {
@@ -93,6 +97,17 @@ export default {
       }
       // 如果没滚动：返回0也就是默认第一个不动~
       return 0
+    },
+    selectFoods () {
+      const foods = []
+      this.goods.forEach(good => {
+        good.foods.forEach(food => {
+          if (food.count) {
+            foods.push(food)
+          }
+        })
+      })
+      return foods
     }
   },
   methods: {
@@ -157,7 +172,8 @@ export default {
     }
   },
   components: {
-    shopcart
+    shopcart,
+    cartcontrol
   }
 }
 </script>
@@ -264,6 +280,10 @@ export default {
                 text-decoration line-through
                 font-size 10px
                 color rgb(147,153,159)
+            .cartcontrol-wrapper
+              position absolute
+              bottom 12px
+              right 0
     
 
 </style>

@@ -1,41 +1,50 @@
 <template>
   <div>
     <ul class="priceList">
-      <li class="goodsList"  v-for="(price,index) in prices" :key="price.money">
+      <li class="goodsList"  v-for="price in prices" :key="price.money">
         <span class="goodsPrice">商品价格为：￥{{price.money}}元</span>
         <div class="count-wrapper">
-          <span class="icon" @click="reduceCount"><i class="icon-remove_circle_outline"></i></span>
-          <span class="num">{{count}}</span>
-          <span class="icon" @click="addCount"><i class="icon-add_circle"></i></span>
+          <span class="icon" @click="decreaseCart"><i class="icon-remove_circle_outline"></i></span>
+          <span class="num">{{price.count}}</span>
+          <span class="icon" @click="addCart"><i class="icon-add_circle"></i></span>
         </div>
       </li>
     </ul>
-    <div>总价格为：{{total}}</div>
+    <div>总价格为：{{totalPrice}}</div>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 export default {
   data () {
     return {
       prices: [
-        { money: 23 },
-        { money: 24 },
-        { money: 5 },
-        { money: 14 },
-        { money: 9 },
-        { money: 17 }
-      ],
-      total: 0,
-      count: 0
+        { money: 23, count: 0 }
+      ]
+    }
+  },
+  computed: {
+    totalPrice () {
+      let total = 0
+      this.prices.forEach(food => {
+        total += food.money * food.count
+      })
+      return total
     }
   },
   methods: {
-    addCount () {
-      this.count++
+    decreaseCart () {
+      if (this.prices.count) {
+        this.prices.count --
+      }
     },
-    reduceCount: function () {
-      this.count--
+    addCart () {
+      if (!this.prices.count) {
+        Vue.set(this.prices, 'count', 1)
+      } else {
+        this.prices.count ++
+      }
     }
   }
 }
