@@ -1,86 +1,99 @@
 <template>
   <div>
-    <ul class="priceList">
-      <li class="goodsList"  v-for="price in prices" :key="price.money">
-        <span class="goodsPrice">商品价格为：￥{{price.money}}元</span>
-        <div class="count-wrapper">
-          <span class="icon" @click="decreaseCart"><i class="icon-remove_circle_outline"></i></span>
-          <span class="num">{{price.count}}</span>
-          <span class="icon" @click="addCart"><i class="icon-add_circle"></i></span>
+    <ul>
+      <li class="foods" v-for="(food,index) in foods" :key="index">
+        <img :src="food.icon" alt="233~" width=50>
+        <span>{{food.name}}</span>
+        <span class="red">￥{{food.price}} 元</span>
+        <div class="cartcontrol-wrapper">
+          <cartcon :food="food"></cartcon>
         </div>
+        
       </li>
     </ul>
-    <div>总价格为：{{totalPrice}}</div>
+    <div class="shopcart">
+      <span>总价格为：{{totalPrice}}元</span>
+      <span>总数为：{{totalCount}}</span>
+    </div>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
+import cartcon from '@/components/seller/cartcon'
 export default {
   data () {
     return {
-      prices: [
-        { money: 23, count: 0 }
+      foods: [
+        { name: '皮蛋瘦肉粥1', price: 11, icon: 'http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/114/h/114' },
+        { name: '皮蛋瘦肉粥2', price: 12, icon: 'http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/114/h/114' },
+        { name: '皮蛋瘦肉粥3', price: 13, icon: 'http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/114/h/114' }
       ]
     }
   },
   computed: {
     totalPrice () {
       let total = 0
-      this.prices.forEach(food => {
-        total += food.money * food.count
+      this.foods.forEach(food => {
+        if (food.count) {
+          total += food.price * food.count
+        }
       })
       return total
+    },
+    totalCount () {
+      let count = 0
+      this.foods.forEach(food => {
+        if (food.count) {
+          count += food.count
+        }
+      })
+      return count
     }
   },
-  methods: {
-    decreaseCart () {
-      if (this.prices.count) {
-        this.prices.count --
-      }
-    },
-    addCart () {
-      if (!this.prices.count) {
-        Vue.set(this.prices, 'count', 1)
-      } else {
-        this.prices.count ++
-      }
-    }
+  components: {
+    cartcon
   }
 }
 </script>
 
-<style lang="stylus">
-.goodsList
-  display flex
+<style lang="stylus" scoped>
+.foods
+  position relative
   width 100%
-  height 30px
-  padding 5px
-  margin 10px 0
-  line-height 30px
-  .goodsPrice
-    flex 1
-  .count-wrapper
-    flex 0 0 120px
-    .icon
-      display inline-block
-      width 30px
-      height 100%
-      text-align center
-    .icon-add_circle,.icon-remove_circle_outline
-      color lightblue
-      font-size 24px
-      vertical-align middle
-    .num
-      display inline-block
-      width 30px
-      border 1px solid #ddd
-      border-radius 6px
-      font-size 16px
-      text-align center
-      font-weight 700
-      color coral
-      vertical-align middle
-    
-
+  height 50px
+  padding 12px 12px 0
+  color #93999f
+  img
+    vertical-align top
+  span 
+    display inline-block
+    vertical-align top
+    line-height 50px
+  .red
+    color coral
+.cartcontrol
+  font-size 0
+  position absolute
+  right 30px
+  top 19px
+  .cart-decrease,.cart-add
+    display inline-block
+    line-height 24px
+    font-size 24px
+    padding 6px
+    color rgb(0,160,220)
+  .cart-count
+    display inline-block
+    vertical-align top
+    width 12px
+    padding-top 6px
+    font-size 10px
+    line-height 24px
+    text-align center
+    color rgb(147,153,159)
+.cartcontrol-wrapper
+  position absolute
+  width 150px
+  bottom 62px
+  right 0
 </style>
