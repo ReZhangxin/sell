@@ -2,7 +2,15 @@
 
 > sell app
 
-![饿了么](http://p17big5q8.bkt.clouddn.com/x-elme.gif)
+图片如下：
+
+- 实现左侧菜单与右侧联动：
+
+![饿了么](http://p17big5q8.bkt.clouddn.com/x-elme1.gif)
+
+- 购物车功能：
+
+![购物车](http://p17big5q8.bkt.clouddn.com/x-elme2.gif)
 
 ## Build Setup
 
